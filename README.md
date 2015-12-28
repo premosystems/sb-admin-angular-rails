@@ -1,4 +1,4 @@
-## SB Admin v2.0 rewritten in AngularJS
+## SB Admin v2.0 rewritten in AngularJS and Ruby on Rails
 
 [![Join the chat at https://gitter.im/start-angular/sb-admin-angular](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/start-angular/sb-admin-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -10,53 +10,14 @@ Find out more [Free Angular Themes at StartAngular.com](http://www.startangular.
 ####1. Clone this project or Download that ZIP file
 
 ```sh
-$ git clone https://github.com/start-angular/sb-admin-angular.git
+$ git clone https://github.com/premosystems/sb-admin-angular-rails.git
 ```
 
-####2.  Make sure you have [bower](http://bower.io/), [grunt-cli](https://www.npmjs.com/package/grunt-cli) and  [npm](https://www.npmjs.org/) installed globally
+####2.  Make sure you have [postgres](http://www.postgresql.org/) and [bower](http://bower.io/) installed globally
  
+####3. Run bower install
  
-```sh
-$ sudo apt-get install npm
-$ sudo npm install -g grunt-cli
-$ sudo npm install -g bower
-```
-####3. On the command prompt run the following commands
-
-```sh
-$ cd `project-directory`
-```
-- bower install is ran from the postinstall
-```sh
-$ npm install 
-```
-- a shortcut for `grunt serve`
-```sh
-$ npm start
-```
-- a shortcut for `grunt serve:dist` to minify the files for deployment
-```sh
-$ npm run dist 
-```
+####4. Create a database named "sbadmin_development" and run rake:db:migrate 
 
 
-**Note:**
-If you get this following error, 
-```text
-Error: EACCES, permission denied '.config/configstore/insight-bower.yml'
-You don't have access to this file.
-```
-changing ownner .config
 
-```sh
-sudo chown -R [user name] ~/.config
-```
-
-
-## Roadmap
-
-- Add sample AJAX calls and make the directives more modular
-
-### Automation tools
-
-- [Grunt](http://gruntjs.com/)
