@@ -1,0 +1,166 @@
+'use strict';
+/**
+ * @ngdoc overview
+ * @name sbAdminApp
+ * @description
+ * # sbAdminApp
+ *
+ * Main module of the application.
+ */
+
+angular
+    .module('sbAdminApp', [
+      'oc.lazyLoad',
+      'ui.router',
+      'ui.bootstrap',
+      'angular-loading-bar'
+    ])
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider','$locationProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$locationProvider) {
+
+      $ocLazyLoadProvider.config({
+        debug: false,
+        events: true,
+      });
+
+      $urlRouterProvider.otherwise('dashboard/home');
+
+      // use the HTML5 History API
+      $locationProvider.html5Mode(true);
+
+      $stateProvider
+          .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/dashboard/main.html' %>",
+            resolve: {
+              loadMyDirectives: function ($ocLazyLoad) {
+                return $ocLazyLoad.load(
+                    {
+                      name: 'sbAdminApp',
+                      files: [
+                        "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/header/header' %>",
+                        "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/header/header-notification/header-notification.js' %>",
+                        "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/sidebar/sidebar.js' %>",
+                        "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/sidebar/sidebar-search/sidebar-search.js' %>"
+                      ]
+                    }),
+                    $ocLazyLoad.load(
+                        {
+                          name: 'toggle-switch',
+                          files: [
+                            "<%= ApplicationHelper.asset_digest_path_helper 'angular-toggle-switch/angular-toggle-switch.min.js' %>",
+                            "<%= ApplicationHelper.asset_digest_path_helper 'angular-toggle-switch/angular-toggle-switch.css' %>"
+                          ]
+                        }),
+                    $ocLazyLoad.load(
+                        {
+                          name: 'ngAnimate',
+                          files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-animate/angular-animate.js' %>"]
+                        })
+                $ocLazyLoad.load(
+                    {
+                      name: 'ngCookies',
+                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-cookies/angular-cookies.js' %>"]
+                    })
+                $ocLazyLoad.load(
+                    {
+                      name: 'ngResource',
+                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-resource/bower-angular-resource-1.2.16/angular-resource.js' %>"]
+                    })
+                $ocLazyLoad.load(
+                    {
+                      name: 'ngSanitize',
+                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-sanitize/bower-angular-sanitize-1.2.16/angular-sanitize.js' %>"]
+                    })
+                $ocLazyLoad.load(
+                    {
+                      name: 'ngTouch',
+                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-touch/angular-touch.js' %>"]
+                    })
+              }
+            }
+          })
+          .state('dashboard.home', {
+            url: '/home',
+            controller: 'MainCtrl',
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/dashboard/home.html' %>",
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/controllers/main.js' %>",
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/timeline/timeline.js' %>",
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/notifications/notifications.js' %>",
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/chat/chat.js' %>",
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/dashboard/stats/stats.js' %>"
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.form', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/form.html' %>",
+            url: '/form'
+          })
+          .state('dashboard.blank', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/pages/blank.html' %>",
+            url: '/blank'
+          })
+          .state('login', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/pages/login.html' %>",
+            url: '/login'
+          })
+          .state('dashboard.chart', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/chart.html' %>",
+            url: '/chart',
+            controller: 'ChartCtrl',
+            resolve: {
+              loadMyFile: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'chart.js',
+                  files: [
+                    "<%= ApplicationHelper.asset_digest_path_helper 'angular-chart.js/angular-chart.js-0.5.3/dist/angular-chart.min.js' %>",
+                    "<%= ApplicationHelper.asset_digest_path_helper 'angular-chart.js/angular-chart.js-0.5.3/dist/angular-chart.css' %>"
+                  ]
+                }),
+                    $ocLazyLoad.load({
+                      name: 'sbAdminApp',
+                      files: ["<%= ApplicationHelper.asset_digest_path_helper 'ng-app/controllers/chartContoller.js' %>"]
+                    })
+              }
+            }
+          })
+          .state('dashboard.table', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/table.html' %>",
+            url: '/table'
+          })
+          .state('dashboard.panels-wells', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/panels-wells.html' %>",
+            url: '/panels-wells'
+          })
+          .state('dashboard.buttons', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/buttons.html' %>",
+            url: '/buttons'
+          })
+          .state('dashboard.notifications', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/notifications.html' %>",
+            url: '/notifications'
+          })
+          .state('dashboard.typography', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/typography.html' %>",
+            url: '/typography'
+          })
+          .state('dashboard.icons', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/icons.html' %>",
+            url: '/icons'
+          })
+          .state('dashboard.grid', {
+            templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/ui-elements/grid.html' %>",
+            url: '/grid'
+          })
+
+
+
+    }]);
+
+

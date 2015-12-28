@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Myapp</title>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'sb-admin-2' %>
+  <%= stylesheet_link_tag 'main' %>
+  <%= stylesheet_link_tag 'timeline' %>
+  <%= stylesheet_link_tag 'metisMenu/metisMenu-1.1.3/dist/metisMenu' %>
+  <%= stylesheet_link_tag 'angular-loading-bar/build/loading-bar' %>
+  <%= stylesheet_link_tag 'font-awesome/css/font-awesome' %>
+
+  <%= javascript_include_tag 'jquery/dist/jquery' %>
+  <%= javascript_include_tag 'angular/angular' %>
+  <%= javascript_include_tag 'bootstrap-sass-official/assets/javascripts/bootstrap' %>
+  <%= javascript_include_tag 'angular-ui-router/release/angular-ui-router' %>
+  <%= javascript_include_tag 'json3/lib/json3' %>
+  <%= javascript_include_tag 'oclazyload/dist/ocLazyLoad' %>
+  <%= javascript_include_tag 'angular-loading-bar/build/loading-bar' %>
+  <%= javascript_include_tag 'angular-bootstrap/ui-bootstrap-tpls' %>
+  <%= javascript_include_tag 'metisMenu/metisMenu-1.1.3/dist/metisMenu' %>
+  <%= javascript_include_tag 'chartjs/Chart' %>
+
+  <%= javascript_include_tag 'ng-app/app' %>
+  <%= javascript_include_tag 'sb-admin-2' %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body ng-app="sbAdminApp">
+<base href="/">
+
+<div ui-view></div>
+
+</body>
+</html>
+
