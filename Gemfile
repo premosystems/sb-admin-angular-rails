@@ -34,7 +34,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem 'sprockets', '2.12.3'
 
-gem 'devise'
+gem 'omniauth'
+gem 'devise_token_auth'
 
 gem 'bower-rails'
 

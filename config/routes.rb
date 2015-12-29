@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+  mount_devise_token_auth_for 'User', at: 'auth'
+  as :user do
+    # Define routes for User within this block.
+  end
+
   root 'application#index'
   get '*path' => 'application#index'
 
-  #devise_for :users
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -30,7 +34,7 @@ Rails.application.routes.draw do
   #     end
   #
   #     collection do
-  #       get 'sold'
+  #       gbower install ng-token-auth --saveet 'sold'
   #     end
   #   end
 

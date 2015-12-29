@@ -8,14 +8,20 @@
  * Main module of the application.
  */
 
-angular
+var myApp = angular
     .module('sbAdminApp', [
       'oc.lazyLoad',
       'ui.router',
       'ui.bootstrap',
-      'angular-loading-bar'
+      'angular-loading-bar',
+      'ng-token-auth'
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider','$locationProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', '$authProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, $authProvider) {
+
+      $authProvider.configure({
+        apiUrl: '/'
+      });
+
 
       $ocLazyLoadProvider.config({
         debug: false,
@@ -32,6 +38,12 @@ angular
             url: '/dashboard',
             templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/dashboard/main.html' %>",
             resolve: {
+              auth: function ($auth, $location) {
+                return $auth.validateUser().catch(function(err){
+                  console.info('not authenticated', err);
+                  $location.path('/login');
+                });
+              },
               loadMyDirectives: function ($ocLazyLoad) {
                 return $ocLazyLoad.load(
                     {
@@ -54,27 +66,27 @@ angular
                     $ocLazyLoad.load(
                         {
                           name: 'ngAnimate',
-                          files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-animate/angular-animate.js' %>"]
+                          files: ["<%= ApplicationHelper.asset_digest_path_helper 'angular-animate/angular-animate.js' %>"]
                         })
                 $ocLazyLoad.load(
                     {
                       name: 'ngCookies',
-                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-cookies/angular-cookies.js' %>"]
+                      files: ["<%= ApplicationHelper.asset_digest_path_helper 'angular-cookies/angular-cookies.js' %>"]
                     })
                 $ocLazyLoad.load(
                     {
                       name: 'ngResource',
-                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-resource/bower-angular-resource-1.2.16/angular-resource.js' %>"]
+                      files: ["<%= ApplicationHelper.asset_digest_path_helper 'angular-resource/bower-angular-resource-1.2.16/angular-resource.js' %>"]
                     })
                 $ocLazyLoad.load(
                     {
                       name: 'ngSanitize',
-                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-sanitize/bower-angular-sanitize-1.2.16/angular-sanitize.js' %>"]
+                      files: ["<%= ApplicationHelper.asset_digest_path_helper 'angular-sanitize/bower-angular-sanitize-1.2.16/angular-sanitize.js' %>"]
                     })
                 $ocLazyLoad.load(
                     {
                       name: 'ngTouch',
-                      files: [ "<%= ApplicationHelper.asset_digest_path_helper 'angular-touch/angular-touch.js' %>"]
+                      files: ["<%= ApplicationHelper.asset_digest_path_helper 'angular-touch/angular-touch.js' %>"]
                     })
               }
             }
@@ -160,7 +172,19 @@ angular
           })
 
 
-
     }]);
+
+
+function authenticateRoute($auth, $state) {
+  return $auth.validateUser()
+      .catch(function(res) {
+
+        if (!res) {
+          $state.go('login');
+        }
+      });
+}
+
+
 
 
