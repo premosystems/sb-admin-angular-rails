@@ -16,6 +16,8 @@ module LeadFinder
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    # config.assets.initialize_on_precompile = false
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{*/}')]
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -28,17 +30,8 @@ module LeadFinder
     config.assets.paths << Rails.root.join('lib','assets','bower_components','bootstrap-sass-official', 'assets', 'stylesheets')
     config.assets.paths << Rails.root.join('lib','assets','bower_components','bootstrap-sass-official', 'assets','fonts')
 
-
-    # config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
-    #config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
-
-    #config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components','bootstrap-sass-official', 'vendor', 'assets', 'stylesheets')
-    #config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components','bootstrap-sass-official', 'vendor', 'assets', 'fonts')
-
-
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    #config.angular_templates.module_name    = 'sbAdminApp'
   end
 end

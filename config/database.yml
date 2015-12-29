@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: sbadmin_production
-  username: LeadFinder
-  password: <%= ENV['sbadmin_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
