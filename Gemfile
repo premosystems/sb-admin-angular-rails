@@ -47,6 +47,8 @@ gem 'therubyracer'
 
 gem 'less-rails'
 
+gem 'pundit'
+
 #gem 'bootstrap-sass'
 
 #gem 'font-awesome-rails'

@@ -23,12 +23,13 @@ angular.module('sbAdminApp')
               .catch(function(resp) {
                   // handle error response
                   //alert('Login Failure!');
+                  $('#loginFailedModal').modal('show');
                   //$location.path('/login');
               });
       };
 
       $scope.doLogout = function() {
-          
+
           $auth.signOut()
               .then(function(resp) {
                   // handle success response
