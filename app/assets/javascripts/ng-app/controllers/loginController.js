@@ -9,14 +9,14 @@
 angular.module('sbAdminApp')
   .controller('LoginController', function($scope,$auth,$location) {
 
-      $scope.submitLogin = function(loginForm) {
+      $scope.doLogin = function(loginForm) {
 
           console.info(JSON.stringify(loginForm));
 
           $auth.submitLogin(loginForm)
               .then(function(resp) {
                   // handle success response
-                  alert('Login Success!');
+                  // alert('Login Success!');
                   $location.path('/');
 
               })
@@ -24,6 +24,18 @@ angular.module('sbAdminApp')
                   // handle error response
                   //alert('Login Failure!');
                   //$location.path('/login');
+              });
+      };
+
+      $scope.doLogout = function() {
+          
+          $auth.signOut()
+              .then(function(resp) {
+                  // handle success response
+                  $location.path('/login');
+              })
+              .catch(function(resp) {
+                  // handle error response
               });
       };
 
