@@ -6,13 +6,13 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form ng-controller="LoginController"  role="form" ng-init="loginForm = {}">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" ng-model="loginForm.email" required="required" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="" ng-model="loginForm.password" required="required">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -20,7 +20,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a ui-sref="dashboard.home" class="btn btn-lg btn-success btn-block">Login</a>
+                            <a ng-click="submitLogin(loginForm)" class="btn btn-lg btn-success btn-block">Login</a>
                         </fieldset>
                     </form>
                 </div>

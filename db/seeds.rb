@@ -10,10 +10,9 @@ case Rails.env
 
   when 'development'
 
-    password = 'aaaaaaa1'
+    password = 'aaaaaaaa'
 
     User.create(email: 'test@test.com', password: password, password_confirmation: password).save
-
 
   when 'production'
 

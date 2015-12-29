@@ -19,9 +19,8 @@ var myApp = angular
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', '$authProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, $authProvider) {
 
       $authProvider.configure({
-        apiUrl: '/'
-      });
 
+      });
 
       $ocLazyLoadProvider.config({
         debug: false,
@@ -120,7 +119,18 @@ var myApp = angular
           })
           .state('login', {
             templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/pages/login.html' %>",
-            url: '/login'
+            url: '/login',
+            controller: 'LoginController',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/controllers/loginController.js' %>"
+                      ]
+                })
+              }
+            }
           })
           .state('dashboard.chart', {
             templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/views/chart.html' %>",
@@ -175,15 +185,7 @@ var myApp = angular
     }]);
 
 
-function authenticateRoute($auth, $state) {
-  return $auth.validateUser()
-      .catch(function(res) {
 
-        if (!res) {
-          $state.go('login');
-        }
-      });
-}
 
 
 
