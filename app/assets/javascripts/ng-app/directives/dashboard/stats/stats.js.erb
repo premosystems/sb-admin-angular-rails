@@ -6,22 +6,22 @@
  * @description
  * # adminPosHeader
  */
-angular.module('sbAdminApp')
-    .directive('stats',function() {
-    	return {
-  		templateUrl:"<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/dashboard/stats/stats.html' %>",
-  		restrict:'E',
-  		replace:true,
-  		scope: {
-        'model': '=',
-        'comments': '@',
-        'number': '@',
-        'name': '@',
-        'colour': '@',
-        'details':'@',
-        'type':'@',
-        'goto':'@'
-  		}
-  		
-  	}
-  });
+
+app.compileProvider.directive('stats', function () {
+  return {
+    templateUrl: "<%= ApplicationHelper.asset_digest_path_helper 'ng-app/directives/dashboard/stats/stats.html' %>",
+    restrict: 'E',
+    replace: true,
+    scope: {
+      'model': '=',
+      'comments': '@',
+      'number': '=',
+      'name': '@',
+      'colour': '@',
+      'details': '@',
+      'type': '@',
+      'goto': '@'
+    }
+
+  }
+});
